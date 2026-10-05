@@ -4,11 +4,11 @@ An automated Python-based job search pipeline that collects recent **Data Analys
 
 ## Project Overview
 
-This project automates the repetitive process of searching for relevant jobs across preferred locations and experience levels.
+This project automates the repetitive process of searching for relevant job opportunities across preferred locations and experience levels.
 
-The pipeline uses the **Apify Indeed Jobs Scraper** to collect job listings and then applies custom Python-based filtering and scoring logic to identify the most relevant opportunities.
+The pipeline uses the **Apify Indeed Jobs Scraper** to collect job listings and applies custom Python-based filtering, skill matching, and scoring logic to identify relevant opportunities.
 
-The final results are exported to an Excel report and automatically sent as an email attachment.
+The final results are exported to an Excel report and automatically delivered as an email attachment.
 
 ## Pipeline
 
@@ -53,10 +53,10 @@ Email Delivery
 * Calculates a relevance score for each job
 * Removes duplicate job listings
 * Sorts jobs by relevance
-* Generates an Excel report containing the matched jobs
+* Generates an Excel report containing matched opportunities
 * Includes a debugging/diagnostic sheet for monitoring filtering results
 * Automatically sends the generated report through Gmail
-* Keeps API credentials and email credentials outside the source code using environment variables
+* Keeps API and email credentials outside the source code using environment variables
 
 ## Target Roles
 
@@ -140,7 +140,7 @@ A debugging sheet is also generated to provide visibility into the filtering pro
 
 ## Email Automation
 
-After generating the Excel report, the project can automatically send the report as an email attachment using Gmail SMTP.
+After generating the Excel report, the project automatically sends the report as an email attachment using Gmail SMTP.
 
 The following environment variables are used:
 
@@ -153,7 +153,7 @@ TO_EMAIL
 
 Credentials are intentionally kept outside the GitHub repository.
 
-**Do not commit API tokens, Gmail passwords, or App Passwords to GitHub.**
+**Never commit API tokens, Gmail passwords, or App Passwords to GitHub.**
 
 ## Technologies Used
 
@@ -183,9 +183,9 @@ job-search-automation-pipeline/
 | File               | Description                                                                                |
 | ------------------ | ------------------------------------------------------------------------------------------ |
 | `scraper.py`       | Collects, filters, scores, deduplicates, and exports job listings                          |
-| `scraperemail.py`  | Handles email delivery of the generated report                                             |
+| `scraperemail.py`  | Runs the job pipeline and handles email delivery of the generated report                   |
 | `requirements.txt` | Python dependencies required by the project                                                |
-| `run_scraper.bat`  | Windows script used to run the pipeline                                                    |
+| `run_scraper.bat`  | Windows script used to run the automated pipeline                                          |
 | `README.md`        | Project documentation                                                                      |
 | `.gitignore`       | Prevents credentials, generated files, logs, and virtual environments from being committed |
 
@@ -218,7 +218,7 @@ pip install -r requirements.txt
 
 ### 4. Configure environment variables
 
-Set the required environment variables:
+Set the following environment variables:
 
 ```text
 APIFY_TOKEN=your_apify_token
@@ -227,21 +227,30 @@ EMAIL_PASS=your_gmail_app_password
 TO_EMAIL=recipient_email
 ```
 
-For Gmail, an **App Password** should be used instead of the normal Gmail account password.
+For Gmail, use a **Google App Password** rather than your normal Gmail account password.
 
 ### 5. Run the pipeline
 
-```bash
-python scraper.py
+To run the complete workflow, including report generation and email delivery:
+
+```cmd
+python scraperemail.py
 ```
 
-The generated Excel report can then be sent through the email automation script.
-
-For Windows, the included batch file can also be used:
+On Windows, the included batch file can also be used:
 
 ```cmd
 run_scraper.bat
 ```
+
+The pipeline will:
+
+1. Collect recent job listings
+2. Filter and evaluate the listings
+3. Calculate relevance scores
+4. Remove duplicates
+5. Generate `Job_Report.xlsx`
+6. Send the report through email
 
 ## Future Improvements
 
