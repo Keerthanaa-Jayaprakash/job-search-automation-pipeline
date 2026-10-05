@@ -1,0 +1,14 @@
+venv/
+__pycache__/
+*.pyc
+
+Job_Report.xlsx
+scraper_log.txt
+scraper_output.txt
+
+.env
+
+*.log
+
+.idea/
+.vscode/
